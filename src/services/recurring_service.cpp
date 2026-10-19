@@ -82,7 +82,7 @@ ServiceResult RecurringService::post(const RecurringPreview& preview) {
     if (txId < 0) return ServiceResult::failure(QStringLiteral("Failed to post transaction."));
 
     if (!recurring_.markPosted(fresh->id, preview.dueDate)) {
-        tx_.remove(txId);
+        (void)tx_.remove(txId);
         return ServiceResult::failure(QStringLiteral("Failed to update recurring rule."));
     }
     return ServiceResult::success(txId);

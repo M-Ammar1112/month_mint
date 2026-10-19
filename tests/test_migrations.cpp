@@ -41,7 +41,7 @@ private slots:
             Database db{path};
             auto handle = db.handle();
             CategoryRepo cats{handle};
-            cats.seedDefaults();
+            (void)cats.seedDefaults();
             TransactionRepo tx{handle};
             const auto food = cats.findByName(QStringLiteral("Food"));
             QVERIFY(food.has_value());

@@ -14,9 +14,9 @@ private slots:
         const auto salary = db.categoryId(QStringLiteral("Salary"));
         const YearMonth month{2026, 3};
 
-        db.txService->addIncome(Money{300000}, QDate{2026, 3, 1}, salary);
-        db.txService->addExpense(Money{50000}, QDate{2026, 3, 5}, food);
-        db.txService->addExpense(Money{25000}, QDate{2026, 3, 20}, food);
+        (void)db.txService->addIncome(Money{300000}, QDate{2026, 3, 1}, salary);
+        (void)db.txService->addExpense(Money{50000}, QDate{2026, 3, 5}, food);
+        (void)db.txService->addExpense(Money{25000}, QDate{2026, 3, 20}, food);
 
         const auto s = db.summaryService->monthlySummary(month);
         QCOMPARE(s.income, Money{300000});
@@ -27,9 +27,9 @@ private slots:
     void transactionsOutsideMonthExcluded() {
         TestDatabase db;
         const auto food = db.categoryId(QStringLiteral("Food"));
-        db.txService->addExpense(Money{1000}, QDate{2026, 2, 28}, food);
-        db.txService->addExpense(Money{2000}, QDate{2026, 4, 1}, food);
-        db.txService->addExpense(Money{3000}, QDate{2026, 3, 15}, food);
+        (void)db.txService->addExpense(Money{1000}, QDate{2026, 2, 28}, food);
+        (void)db.txService->addExpense(Money{2000}, QDate{2026, 4, 1}, food);
+        (void)db.txService->addExpense(Money{3000}, QDate{2026, 3, 15}, food);
 
         const auto s = db.summaryService->monthlySummary(YearMonth{2026, 3});
         QCOMPARE(s.expenses, Money{3000});
@@ -40,8 +40,8 @@ private slots:
         const auto food = db.categoryId(QStringLiteral("Food"));
         const auto housing = db.categoryId(QStringLiteral("Housing"));
 
-        db.txService->addExpense(Money{4000}, QDate{2026, 3, 1}, food);
-        db.txService->addExpense(Money{10000}, QDate{2026, 3, 2}, housing);
+        (void)db.txService->addExpense(Money{4000}, QDate{2026, 3, 1}, food);
+        (void)db.txService->addExpense(Money{10000}, QDate{2026, 3, 2}, housing);
 
         const auto cats = db.catRepo->all();
         const auto spends = db.summaryService->spendingByCategory(YearMonth{2026, 3}, cats);
@@ -57,9 +57,9 @@ private slots:
         const auto food = db.categoryId(QStringLiteral("Food"));
         const YearMonth month{2026, 3};
 
-        db.txService->addExpense(Money{5000}, QDate{2026, 3, 5}, food);
-        db.savingsService->setTarget(month, Money{20000});
-        db.savingsService->allocate(month, Money{10000});
+        (void)db.txService->addExpense(Money{5000}, QDate{2026, 3, 5}, food);
+        (void)db.savingsService->setTarget(month, Money{20000});
+        (void)db.savingsService->allocate(month, Money{10000});
 
         const auto s = db.summaryService->monthlySummary(month);
         QCOMPARE(s.expenses, Money{5000});       // allocation excluded

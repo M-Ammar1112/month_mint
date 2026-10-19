@@ -101,7 +101,7 @@ void SettingsDialog::save() {
     ctx_.settings.currencyCode = currencyCombo_->currentData().toString();
     ctx_.settings.localeTag = localeCombo_->currentData().toString();
     ctx_.settings.theme = themeCombo_->currentData().toString();
-    ctx_.settingsRepo.save(ctx_.settings);
+    (void)ctx_.settingsRepo.save(ctx_.settings);
     applyTheme(ctx_.settings.theme);
     emit settingsChanged();
     accept();

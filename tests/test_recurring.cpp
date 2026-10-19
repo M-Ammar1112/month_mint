@@ -31,7 +31,7 @@ private slots:
         r.amount = Money{50000};
         r.categoryId = rent;
         r.dayOfMonth = 1;
-        db.recurringService->addRule(r);
+        (void)db.recurringService->addRule(r);
 
         const auto previews = db.recurringService->duePreviews(QDate{2026, 3, 15});
         QCOMPARE(previews.size(), 1);
@@ -47,7 +47,7 @@ private slots:
         r.amount = Money{50000};
         r.categoryId = rent;
         r.dayOfMonth = 25;
-        db.recurringService->addRule(r);
+        (void)db.recurringService->addRule(r);
 
         const auto previews = db.recurringService->duePreviews(QDate{2026, 3, 10});
         QVERIFY(previews.isEmpty());
@@ -61,7 +61,7 @@ private slots:
         r.amount = Money{50000};
         r.categoryId = rent;
         r.dayOfMonth = 1;
-        db.recurringService->addRule(r);
+        (void)db.recurringService->addRule(r);
 
         const auto previews = db.recurringService->duePreviews(QDate{2026, 3, 15});
         QCOMPARE(previews.size(), 1);
@@ -80,7 +80,7 @@ private slots:
         r.amount = Money{50000};
         r.categoryId = rent;
         r.dayOfMonth = 1;
-        db.recurringService->addRule(r);
+        (void)db.recurringService->addRule(r);
 
         const auto previews = db.recurringService->duePreviews(QDate{2026, 3, 15});
         QCOMPARE(previews.size(), 1);

@@ -33,7 +33,7 @@ struct AppContext {
           recurringService(recurringRepo, txRepo, categoryRepo),
           savingsService(savingsRepo),
           exportService(txRepo) {
-        categoryRepo.seedDefaults();
+        (void)categoryRepo.seedDefaults();
         settings = settingsRepo.load();
     }
 

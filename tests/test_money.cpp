@@ -56,12 +56,12 @@ private slots:
 
     void additionOverflowThrows() {
         const Money max = Money::max();
-        QVERIFY_THROWS_EXCEPTION(MoneyOverflowError, max + Money{1});
+        QVERIFY_THROWS_EXCEPTION(MoneyOverflowError, (void)(max + Money{1}));
     }
 
     void subtractionOverflowThrows() {
         const Money min = Money::min();
-        QVERIFY_THROWS_EXCEPTION(MoneyOverflowError, min - Money{1});
+        QVERIFY_THROWS_EXCEPTION(MoneyOverflowError, (void)(min - Money{1}));
     }
 
     void structuredBindingFriendly() {

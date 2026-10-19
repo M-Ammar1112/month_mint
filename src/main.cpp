@@ -46,14 +46,14 @@ int main(int argc, char* argv[]) {
         ctx->settings.currencyCode = choices.currencyCode;
         ctx->settings.theme = choices.theme;
         ctx->settings.firstRunCompleted = true;
-        ctx->settingsRepo.save(ctx->settings);
+        (void)ctx->settingsRepo.save(ctx->settings);
 
         const auto month = yearMonthOf(QDate::currentDate());
         if (choices.monthlyBudgetMinor) {
-            ctx->budgetService.setOverallLimit(month, Money{*choices.monthlyBudgetMinor});
+            (void)ctx->budgetService.setOverallLimit(month, Money{*choices.monthlyBudgetMinor});
         }
         if (choices.savingsTargetMinor) {
-            ctx->savingsService.setTarget(month, Money{*choices.savingsTargetMinor});
+            (void)ctx->savingsService.setTarget(month, Money{*choices.savingsTargetMinor});
         }
     }
 

@@ -51,8 +51,8 @@ private slots:
     void exportIncludesHeaderAndRows() {
         TestDatabase db;
         const auto food = db.categoryId(QStringLiteral("Food"));
-        db.txService->addExpense(Money{1234}, QDate{2026, 3, 10}, food, QStringLiteral("Groceries"));
-        db.txService->addExpense(Money{5678}, QDate{2026, 3, 12}, food, QStringLiteral("Lunch"));
+        (void)db.txService->addExpense(Money{1234}, QDate{2026, 3, 10}, food, QStringLiteral("Groceries"));
+        (void)db.txService->addExpense(Money{5678}, QDate{2026, 3, 12}, food, QStringLiteral("Lunch"));
 
         const QString csvPath = db.dir.filePath(QStringLiteral("export.csv"));
         QString error;
@@ -78,7 +78,7 @@ private slots:
     void exportDescriptionWithCommaIsQuoted() {
         TestDatabase db;
         const auto food = db.categoryId(QStringLiteral("Food"));
-        db.txService->addExpense(Money{100}, QDate{2026, 3, 10}, food,
+        (void)db.txService->addExpense(Money{100}, QDate{2026, 3, 10}, food,
                                  QStringLiteral("Coffee, milk"));
         const QString csvPath = db.dir.filePath(QStringLiteral("export2.csv"));
         QVERIFY(db.exportService->exportToCsv(TransactionFilter{}, csvPath));

@@ -86,9 +86,9 @@ private slots:
     void filterByMonth() {
         TestDatabase db;
         const auto cat = db.categoryId(QStringLiteral("Food"));
-        db.txService->addExpense(Money{100}, QDate{2026, 2, 28}, cat);
-        db.txService->addExpense(Money{200}, QDate{2026, 3, 1}, cat);
-        db.txService->addExpense(Money{300}, QDate{2026, 3, 31}, cat);
+        (void)db.txService->addExpense(Money{100}, QDate{2026, 2, 28}, cat);
+        (void)db.txService->addExpense(Money{200}, QDate{2026, 3, 1}, cat);
+        (void)db.txService->addExpense(Money{300}, QDate{2026, 3, 31}, cat);
 
         TransactionFilter f;
         f.month = YearMonth{2026, 3};
@@ -100,8 +100,8 @@ private slots:
         TestDatabase db;
         const auto food = db.categoryId(QStringLiteral("Food"));
         const auto salary = db.categoryId(QStringLiteral("Salary"));
-        db.txService->addExpense(Money{100}, QDate{2026, 3, 1}, food);
-        db.txService->addIncome(Money{5000}, QDate{2026, 3, 1}, salary);
+        (void)db.txService->addExpense(Money{100}, QDate{2026, 3, 1}, food);
+        (void)db.txService->addIncome(Money{5000}, QDate{2026, 3, 1}, salary);
 
         TransactionFilter f;
         f.month = YearMonth{2026, 3};
@@ -112,8 +112,8 @@ private slots:
     void searchDescription() {
         TestDatabase db;
         const auto cat = db.categoryId(QStringLiteral("Food"));
-        db.txService->addExpense(Money{100}, QDate{2026, 3, 1}, cat, QStringLiteral("Coffee beans"));
-        db.txService->addExpense(Money{200}, QDate{2026, 3, 2}, cat, QStringLiteral("Lunch"));
+        (void)db.txService->addExpense(Money{100}, QDate{2026, 3, 1}, cat, QStringLiteral("Coffee beans"));
+        (void)db.txService->addExpense(Money{200}, QDate{2026, 3, 2}, cat, QStringLiteral("Lunch"));
 
         TransactionFilter f;
         f.month = YearMonth{2026, 3};

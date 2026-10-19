@@ -45,8 +45,8 @@ private slots:
         TestDatabase db;
         const auto food = db.categoryId(QStringLiteral("Food"));
         const YearMonth month{2026, 3};
-        db.txService->addExpense(Money{5000}, QDate{2026, 3, 5}, food);
-        db.savingsService->allocate(month, Money{30000});
+        (void)db.txService->addExpense(Money{5000}, QDate{2026, 3, 5}, food);
+        (void)db.savingsService->allocate(month, Money{30000});
 
         const auto s = db.summaryService->monthlySummary(month);
         QCOMPARE(s.expenses, Money{5000});
@@ -54,8 +54,8 @@ private slots:
 
     void allocationsIsolatedByMonth() {
         TestDatabase db;
-        db.savingsService->allocate(YearMonth{2026, 3}, Money{10000});
-        db.savingsService->allocate(YearMonth{2026, 4}, Money{20000});
+        (void)db.savingsService->allocate(YearMonth{2026, 3}, Money{10000});
+        (void)db.savingsService->allocate(YearMonth{2026, 4}, Money{20000});
         QCOMPARE(db.savingsService->allocated(YearMonth{2026, 3}), Money{10000});
         QCOMPARE(db.savingsService->allocated(YearMonth{2026, 4}), Money{20000});
     }

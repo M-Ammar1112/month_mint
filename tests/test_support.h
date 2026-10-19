@@ -54,7 +54,7 @@ struct TestDatabase {
         recurringService = std::make_unique<RecurringService>(*recurringRepo, *txRepo, *catRepo);
         savingsService = std::make_unique<SavingsService>(*savingsRepo);
         exportService = std::make_unique<ExportService>(*txRepo);
-        catRepo->seedDefaults();
+        (void)catRepo->seedDefaults();
     }
 
     [[nodiscard]] qint64 categoryId(const QString& name) const {

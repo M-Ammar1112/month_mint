@@ -283,7 +283,7 @@ void RecurringDialog::removeRule(int row) {
                                               QStringLiteral("Delete this recurring rule?"),
                                               QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
     if (answer != QMessageBox::Yes) return;
-    ctx_.recurringService.removeRule(id);
+    (void)ctx_.recurringService.removeRule(id);
     reload();
     emit dataChanged();
 }

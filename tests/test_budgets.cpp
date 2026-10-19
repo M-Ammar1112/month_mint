@@ -20,7 +20,7 @@ private slots:
     void clearOverallBudget() {
         TestDatabase db;
         const YearMonth month{2026, 3};
-        db.budgetService->setOverallLimit(month, Money{100000});
+        (void)db.budgetService->setOverallLimit(month, Money{100000});
         QVERIFY(db.budgetService->setOverallLimit(month, std::nullopt).ok);
         QVERIFY(!db.budgetService->overallLimit(month).has_value());
     }
@@ -29,8 +29,8 @@ private slots:
         TestDatabase db;
         const auto food = db.categoryId(QStringLiteral("Food"));
         const YearMonth month{2026, 3};
-        db.budgetService->setOverallLimit(month, Money{100000});
-        db.txService->addExpense(Money{30000}, QDate{2026, 3, 10}, food);
+        (void)db.budgetService->setOverallLimit(month, Money{100000});
+        (void)db.txService->addExpense(Money{30000}, QDate{2026, 3, 10}, food);
 
         QCOMPARE(db.budgetService->overallSpent(month), Money{30000});
         QCOMPARE(db.budgetService->overallRemaining(month), Money{70000});
@@ -42,7 +42,7 @@ private slots:
         const auto food = db.categoryId(QStringLiteral("Food"));
         const YearMonth month{2026, 3};
         QVERIFY(db.budgetService->setCategoryLimit(month, food, Money{20000}).ok);
-        db.txService->addExpense(Money{7500}, QDate{2026, 3, 10}, food);
+        (void)db.txService->addExpense(Money{7500}, QDate{2026, 3, 10}, food);
 
         const auto cats = db.catRepo->all();
         const auto statuses = db.budgetService->categoryStatus(month, cats);
@@ -57,8 +57,8 @@ private slots:
         TestDatabase db;
         const auto food = db.categoryId(QStringLiteral("Food"));
         const YearMonth month{2026, 3};
-        db.budgetService->setCategoryLimit(month, food, Money{10000});
-        db.txService->addExpense(Money{15000}, QDate{2026, 3, 10}, food);
+        (void)db.budgetService->setCategoryLimit(month, food, Money{10000});
+        (void)db.txService->addExpense(Money{15000}, QDate{2026, 3, 10}, food);
 
         const auto cats = db.catRepo->all();
         const auto statuses = db.budgetService->categoryStatus(month, cats);
@@ -73,8 +73,8 @@ private slots:
         const auto food = db.categoryId(QStringLiteral("Food"));
         const YearMonth prev{2026, 2};
         const YearMonth curr{2026, 3};
-        db.budgetService->setOverallLimit(prev, Money{80000});
-        db.budgetService->setCategoryLimit(prev, food, Money{15000});
+        (void)db.budgetService->setOverallLimit(prev, Money{80000});
+        (void)db.budgetService->setCategoryLimit(prev, food, Money{15000});
 
         QVERIFY(db.budgetService->copyFromPrevious(curr).ok);
         QCOMPARE(*db.budgetService->overallLimit(curr), Money{80000});
@@ -89,8 +89,8 @@ private slots:
         TestDatabase db;
         const YearMonth prev{2025, 12};
         const YearMonth curr{2026, 1};
-        db.budgetService->setOverallLimit(prev, Money{90000});
-        db.budgetService->copyFromPrevious(curr);
+        (void)db.budgetService->setOverallLimit(prev, Money{90000});
+        (void)db.budgetService->copyFromPrevious(curr);
         QCOMPARE(*db.budgetService->overallLimit(curr), Money{90000});
     }
 

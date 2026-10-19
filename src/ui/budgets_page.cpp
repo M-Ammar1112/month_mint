@@ -96,12 +96,12 @@ void BudgetsPage::buildUi() {
         emit dataChanged();
     });
     connect(clearBtn, &QPushButton::clicked, this, [this] {
-        ctx_.budgetService.setOverallLimit(month_, std::nullopt);
+        (void)ctx_.budgetService.setOverallLimit(month_, std::nullopt);
         updateOverall();
         emit dataChanged();
     });
     connect(copyBtn, &QPushButton::clicked, this, [this] {
-        ctx_.budgetService.copyFromPrevious(month_);
+        (void)ctx_.budgetService.copyFromPrevious(month_);
         refresh();
         emit dataChanged();
     });
@@ -171,7 +171,7 @@ void BudgetsPage::buildUi() {
         const int r = categoryTable_->currentRow();
         if (r < 0) return;
         const auto id = categoryTable_->item(r, 0)->data(Qt::UserRole).toLongLong();
-        ctx_.budgetService.removeCategoryLimit(month_, id);
+        (void)ctx_.budgetService.removeCategoryLimit(month_, id);
         updateCategories();
         emit dataChanged();
     });
