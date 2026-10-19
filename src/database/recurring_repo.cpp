@@ -36,7 +36,7 @@ qint64 RecurringRepo::insert(const RecurringRule& r) {
     q.addBindValue(transactionTypeKey(r.type));
     q.addBindValue(static_cast<qlonglong>(r.amount.minor()));
     q.addBindValue(r.categoryId);
-    q.addBindValue(r.description);
+    q.addBindValue(r.description.isNull() ? QStringLiteral("") : r.description);
     q.addBindValue(r.dayOfMonth);
     q.addBindValue(r.active ? 1 : 0);
     q.addBindValue(r.lastPostedOn.isValid() ? toIsoDate(r.lastPostedOn) : QVariant{});
@@ -52,7 +52,7 @@ bool RecurringRepo::update(const RecurringRule& r) {
     q.addBindValue(transactionTypeKey(r.type));
     q.addBindValue(static_cast<qlonglong>(r.amount.minor()));
     q.addBindValue(r.categoryId);
-    q.addBindValue(r.description);
+    q.addBindValue(r.description.isNull() ? QStringLiteral("") : r.description);
     q.addBindValue(r.dayOfMonth);
     q.addBindValue(r.active ? 1 : 0);
     q.addBindValue(r.lastPostedOn.isValid() ? toIsoDate(r.lastPostedOn) : QVariant{});

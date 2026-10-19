@@ -83,6 +83,7 @@ private slots:
         db.recurringService->addRule(r);
 
         const auto previews = db.recurringService->duePreviews(QDate{2026, 3, 15});
+        QCOMPARE(previews.size(), 1);
         QVERIFY(db.recurringService->post(previews[0]).ok);
 
         // No longer due in the same month
@@ -103,6 +104,7 @@ private slots:
         (void)db.recurringService->addRule(r);
 
         const auto march = db.recurringService->duePreviews(QDate{2026, 3, 15});
+        QCOMPARE(march.size(), 1);
         (void)db.recurringService->post(march[0]);
 
         const auto april = db.recurringService->duePreviews(QDate{2026, 4, 15});
@@ -138,6 +140,7 @@ private slots:
         (void)db.recurringService->addRule(r);
 
         const auto previews = db.recurringService->duePreviews(QDate{2026, 3, 10});
+        QCOMPARE(previews.size(), 1);
         QVERIFY(db.recurringService->post(previews[0]).ok);
         const auto s = db.summaryService->monthlySummary(YearMonth{2026, 3});
         QCOMPARE(s.income, Money{300000});

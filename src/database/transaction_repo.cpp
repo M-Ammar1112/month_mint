@@ -38,10 +38,7 @@ qint64 TransactionRepo::insert(const Transaction& t) {
     q.addBindValue(t.categoryId);
     const QString desc = t.description.isEmpty() ? QStringLiteral("") : t.description;
     q.addBindValue(desc);
-    if (!q.exec()) {
-        qDebug() << "INSERT failed:" << q.lastError().text() << "conn:" << db().connectionName();
-        return -1;
-    }
+    if (!q.exec()) return -1;
     return q.lastInsertId().toLongLong();
 }
 
@@ -54,7 +51,7 @@ bool TransactionRepo::update(const Transaction& t) {
     q.addBindValue(static_cast<qlonglong>(t.amount.minor()));
     q.addBindValue(toIsoDate(t.date));
     q.addBindValue(t.categoryId);
-    q.addBindValue(t.description);
+    q.addBindValue(t.description.isNull() ? QStringLiteral("") : t.description);
     q.addBindValue(t.id);
     return q.exec() && q.numRowsAffected() > 0;
 }
