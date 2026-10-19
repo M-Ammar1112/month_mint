@@ -1,0 +1,47 @@
+# Build directory
+build/
+Build/
+*.buildLog
+cmake-build-debug/
+cmake-build-release/
+
+# Qt Creator
+*.user
+.clang_complete
+.qtc_clang_dumper
+.idea/
+
+# IDE
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS generated
+.DS_Store
+Thumbs.db
+
+# Qt qmake
+*.pro.user*
+Makefile*
+*.o
+*.so
+*.a
+*.dll
+*.exe
+
+# Build artifacts
+CMakeCache.txt
+CMakeFiles/
+Makefile
+install_manifest.txt
+
+# Qt moc/uic/rcc generated files (optional - can keep for reference)
+*_moc.cpp
+*_ui.h
+*_qrc.cpp
+
+# Debug/release binaries
+debug/
+release/
+*.app/
